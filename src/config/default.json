@@ -1,0 +1,31 @@
+{
+    "statusCode": {
+        "OK": 200,
+        "CREATED" : 201,
+        "INTERNAL_SERVER_ERROR": 500,
+        "DATA_NOT_FOUND": 204,
+        "UNAUTHORIZED": 401,
+        "BAD_REQUEST": 400,
+        "NOT_FOUND": 404,
+        "FORBIDDEN": 403
+    },
+    "apiV1Prefix": "/api/V1",
+    "adminV1Prefix": "/admin/V1",
+    "bcrypt": {
+        "saltRounds": 10
+    },
+    "resMessage": {
+        "Data_Not_Found": "Data not found",
+        "NotSufficentBalance":"You did not have sufficent balance to create new user",
+        "Not_permission_to_login": "Permission not allowed to login",
+         "Games_fetch_successfully":"Games fetch successfully",
+    "accouncement_saved":"Announcement saved successfully",
+    "selectionId_is_require":"selectionId is required for fancy betType.",
+    "announcement_not_found":"Announcement not found",
+    "get_announcements":"successfully get announcement",
+    "announcement_deleted_successfully":"announcement deleted successfully"   
+    },
+    "userRoles": {
+        "ADMIN": "admin"
+    }
+}

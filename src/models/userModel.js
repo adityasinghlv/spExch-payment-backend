@@ -1,0 +1,40 @@
+const mongoose = require('mongoose');
+
+const userSchema = new mongoose.Schema({
+  username: { type: String, required: true, unique: true },
+  name: { type: String, required: true },
+  // roleId: { type: mongoose.Schema.Types.ObjectId, ref: 'Role',  index: true },
+  role: { type: mongoose.Schema.Types.ObjectId, ref: 'Role' },
+  paymentRole : { type: mongoose.Schema.Types.ObjectId,ref : 'PaymentRole' },
+  accountType: { type: String,  enum: ['super-admin', 'master', 'agent', 'user'] },
+  status: { type: String, default: 'active', enum: ['active', 'suspended', 'betLocked', 'locked'] },
+  commission: { type: Number,  default: 0 },
+  commissionBalance: { type: Number,default:0 },
+  exposer: { type: Number, default: 0 },
+  openingBalance: { type: Number, default: 0 },
+  profitLossBalance: { type: Number, default: 0 },
+  totalBalance: { type: Number },
+  creditReference: { type: Number, default: 0 },
+  mobileNumber: { type: String, required: true },
+  refer_code: { type: String },
+  ipAddress: { type: String },
+  country: { type: String, default: 'India' },
+  partnership: { type: Number, default: 0 },
+  password: { type: String, required: true },
+  rollingCommission: { fancy: { type: Number, default: 0 }, matka: { type: Number, default: 0 }, casino: { type: Number, default: 0 }, binary: { type: Number, default: 0 }, sportbook: { type: Number, default: 0 }, bookmaker: { type: Number, default: 0 } },
+  agentRollingCommission: { fancy: { type: Number, default: 0 }, matka: { type: Number, default: 0 }, casino: { type: Number, default: 0 }, binary: { type: Number, default: 0 }, sportbook: { type: Number, default: 0 }, bookmaker: { type: Number, default: 0 } },
+  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  token: { type: String, default: '' },
+  payment_token: { type: String, default: '' },
+  createdAt: { type: Date, default: Date.now },
+  exposureLimit: { type: Number, default: 0, required: function () { return this.accountType === 'user'; } },
+  isDeleted: { type: Boolean, default: false },
+  deletedAt: { type: Date },
+  betBidValue : {type: [mongoose.Schema.Types.Mixed], default: ['100','200','500','1000','2000','5000','10000','25000','50000']},
+  color : {type: [mongoose.Schema.Types.Mixed], default: ['red']},
+  firstTime:{ type: Boolean, default: true},
+  role_name : { type: String,},
+  betDeletePassword : { type: String, default:''}
+});
+
+module.exports = mongoose.model('User', userSchema);
