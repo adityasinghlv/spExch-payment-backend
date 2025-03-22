@@ -28,12 +28,12 @@ require('./src/admin/routes')(app);
 
 // set port, listen for request s
 const PORT = devConfig.PORT || 3010;
-// const HOST = devConfig.HOST || 'localhost';
+const HOST = devConfig.HOST || 'localhost';
 
-// app.listen(PORT, HOST, () => {
-//     console.log(`Server is running on http://${HOST}:${PORT}`);
-// });
-
-app.listen(PORT, () => {
-    console.log(`Server is running on ${PORT}`);
+app.listen(PORT, HOST, () => {
+    console.log(`Server is running on http://${HOST}:${PORT}`);
 });
+
+// app.listen(PORT, () => {
+//     console.log(`Server is running on ${PORT}`);
+// });
