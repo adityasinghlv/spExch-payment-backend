@@ -28,7 +28,6 @@ exports.login = async (body) => {
     const checkUser = await userModel.findOne({
       username: body.username
     });
-  console.log(checkUser)
     if (!checkUser) {
       return {
         statusCode: statusCode.NOT_FOUND,
