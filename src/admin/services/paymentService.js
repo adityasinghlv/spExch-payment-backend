@@ -352,7 +352,7 @@ exports.getupi = async () => {
   }
 };
 
-exports.updateBank = async (body) => {
+ exports.updateBank = async (body) => {
   try {
     const {
       bankId,
@@ -397,6 +397,29 @@ exports.updateBank = async (body) => {
       };
     }
 
+    // Fetch the amountRange document
+    if (amountLimit !== undefined && amountRange) {
+      const rangeDoc = await amountRangeModel.findById(amountRange);
+      if (!rangeDoc) {
+        return {
+          statusCode: statusCode.NOT_FOUND,
+          success: false,
+          message: "Amount range not found",
+        };
+      }
+
+      const { min, max } = rangeDoc; // Assuming min and max exist in the range document
+
+      if (amountLimit < min || amountLimit > max) {
+        return {
+          statusCode: statusCode.BAD_REQUEST,
+          success: false,
+          message: `amountLimit (${amountLimit}) must be between ${min} and ${max}`,
+        };
+      }
+    }
+
+    // Update the bank record
     const updatedBank = await BankModel.findByIdAndUpdate(
       bankId,
       { $set: updateFields },
@@ -426,6 +449,7 @@ exports.updateBank = async (body) => {
     };
   }
 };
+
 
 
 exports.updateUpi = async (body) => {
@@ -469,7 +493,30 @@ exports.updateUpi = async (body) => {
       };
     }
 
-    const updatedUpi = await BankModel.findByIdAndUpdate(
+    // Validate amountLimit against amountRange
+    if (amountLimit !== undefined && amountRange) {
+      const rangeDoc = await amountRangeModel.findById(amountRange);
+      if (!rangeDoc) {
+        return {
+          statusCode: statusCode.NOT_FOUND,
+          success: false,
+          message: "Amount range not found",
+        };
+      }
+
+      const { min, max } = rangeDoc; // Assuming min and max exist in the range document
+
+      if (amountLimit < min || amountLimit > max) {
+        return {
+          statusCode: statusCode.BAD_REQUEST,
+          success: false,
+          message: `amountLimit (${amountLimit}) must be between ${min} and ${max}`,
+        };
+      }
+    }
+
+    // Update UPI record
+    const updatedUpi = await BankModel.findByIdAndUpdate( // Assuming UpiModel is correct
       upiId,
       { $set: updateFields },
       { new: true }
@@ -498,6 +545,7 @@ exports.updateUpi = async (body) => {
     };
   }
 };
+
 
 
 exports.deleteBank = async (body) => {
