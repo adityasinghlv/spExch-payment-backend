@@ -455,7 +455,7 @@ exports.getupi = async () => {
 exports.updateupi = async (body) => {
   try {
     const {
-      upiId,
+      bankId,
       upi,
       upiNumber,
       upiName,
@@ -465,11 +465,11 @@ exports.updateupi = async (body) => {
       status
     } = body;
 
-    if (!upiId) {
+    if (!bankId) {
       return {
         statusCode: statusCode.BAD_REQUEST,
         success: false,
-        message: "UPI ID is required",
+        message: "bankId ID is required",
       };
     }
 
@@ -517,7 +517,7 @@ exports.updateupi = async (body) => {
 
     // Update UPI record
     const updatedUpi = await BankModel.findByIdAndUpdate( // Assuming UpiModel is correct
-      upiId,
+      bankId,
       { $set: updateFields },
       { new: true }
     );
@@ -768,13 +768,13 @@ exports.getQr = async () => {
 
 exports.updateQr = async (req) => {
   try {
-    const { qrId, qrName, amountLimit, amountRange, status } = req.body; 
+    const { bankId, qrName, amountLimit, amountRange, status } = req.body; 
 
-    if (!qrId) {
+    if (!bankId) {
       return {
         statusCode: 400,
         success: false,
-        message: "qrId is required",
+        message: "bankId is required",
       };
     }
 
@@ -807,7 +807,7 @@ exports.updateQr = async (req) => {
     }
 
     const updatedQr = await BankModel.findByIdAndUpdate(
-      qrId,
+      bankId,
       {
         qrName,
         qrImage: updatedQrImage,
