@@ -452,7 +452,7 @@ exports.getupi = async () => {
 
 
 
-exports.updateUpi = async (body) => {
+exports.updateupi = async (body) => {
   try {
     const {
       upiId,
