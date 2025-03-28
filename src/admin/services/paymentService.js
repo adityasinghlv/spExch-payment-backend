@@ -778,7 +778,7 @@ exports.updateQr = async (req) => {
       };
     }
 
-    const existingQr = await BankModel.findById(qrId);
+    const existingQr = await BankModel.findById(bankId);
     if (!existingQr) {
       return {
         statusCode: 404,
