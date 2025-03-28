@@ -34,7 +34,7 @@ router.get("/get-qr",  responseHandler(controllers.getQr));
 router.put('/update-qr',adminAuth, upload.single("qrImage"), responseHandler(controllers.updateQr));
 router.delete('/delete-qr',adminAuth, responseHandler(controllers.deleteQr));
 router.get('/get-payment', adminAuth,responseHandler(controllers.getPayment));
-router.get('/get-user/:username', adminAuth,responseHandler(controllers.getUser));
+router.get('/get-user/:username',responseHandler(controllers.getUser));
 
 
 
