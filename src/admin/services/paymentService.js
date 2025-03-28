@@ -961,3 +961,42 @@ exports.deleteQr = async (body) => {
     };
   }
 };
+
+exports.getUser = async (req, res) => {
+  try {
+    const { username } = req.params;
+    
+    if (!username) {
+      return {
+        statusCode: statusCode.BAD_REQUEST,
+        success: false,
+        message: "Username is required"
+      }
+    }
+
+    const user = await UserModel.findOne({ username });
+
+    if (!user) {
+      return {
+        statusCode: statusCode.NOT_FOUND,
+        success: false,
+        message: "User does not exist"
+      }
+    }
+
+    return {
+      statusCode: statusCode.OK,
+      success: true,
+      message: 'User fetch successfully',
+      data: user
+    };
+
+
+  }catch (error) {
+    return {
+      statusCode: statusCode.BAD_REQUEST,
+      success: false,
+      message: error.message || resMessage.Server_error,
+    };
+  }
+};

@@ -231,3 +231,16 @@ exports.getPayment = async (req,{ body }) => {
         };
     }
 }
+
+exports.getUser = async (req) => {
+    try {
+        return await services.getUser(req);
+    } catch (error) {
+        console.log(error);
+        return {
+            statusCode: statusCode.BAD_REQUEST,
+            success: false,
+            message: error.message
+        };
+    }
+}
