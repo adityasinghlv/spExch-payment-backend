@@ -209,14 +209,13 @@ exports.addQr = async (req) => {
 
 exports.updateQr = async (req, res) => {
     try {
-        const response = await services.updateQr(req);  
-        return res.status(response.statusCode).json(response);
+        return await services.updateQr(req);
     } catch (error) {
-        return res.status(statusCode.BAD_REQUEST).json({
+        return {
             statusCode: statusCode.BAD_REQUEST,
             success: false,
             message: error.message
-        });
+        };
     }
 };
 
