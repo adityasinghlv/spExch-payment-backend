@@ -974,7 +974,7 @@ exports.getUser = async (req, res) => {
       }
     }
 
-    const user = await UserModel.findOne({ username });
+    const user = await userModel.findOne({ username });
 
     if (!user) {
       return {
