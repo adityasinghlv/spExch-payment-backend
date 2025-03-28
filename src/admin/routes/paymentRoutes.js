@@ -31,7 +31,7 @@ router.get('/get-upi', responseHandler(controllers.getupi));
 router.delete('/delete-upi',adminAuth, responseHandler(controllers.deleteupi));
 router.post("/add-qr",adminAuth, upload.single("qrImage"), responseHandler(controllers.addQr));
 router.get("/get-qr",  responseHandler(controllers.getQr));
-router.put('/update-qr',adminAuth, responseHandler(controllers.updateQr));
+router.put('/update-qr',adminAuth, upload.single("qrImage"), responseHandler(controllers.updateQr));
 router.delete('/delete-qr',adminAuth, responseHandler(controllers.deleteQr));
 router.get('/get-payment', adminAuth,responseHandler(controllers.getPayment));
 
